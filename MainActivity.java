@@ -28,7 +28,7 @@ public class MainActivity extends Activity
 		if(!(bout  == null)){
 		if( !(et.getText().toString().equals(""))){
 			try{
-				sendMessage(bout,"PRIVMSG #ModPEScripts :"+et.getText().toString());
+				sendMessage(bout,"PRIVMSG #CHANNEL :"+et.getText().toString());
 				et.setText("");
 			}catch(Exception e){print(e.toString());}
 		}
@@ -81,10 +81,10 @@ public class MainActivity extends Activity
 				BufferedReader breader = new BufferedReader( new InputStreamReader(socket.getInputStream()) );
 				pprint("*Got bufferedreader*");
 
-				sendMessage(bwriter,"Nick expir3dcow");
+				sendMessage(bwriter,"Nick username");
 				pprint("*Sent nick*");
 
-				sendMessage(bwriter,"USER expir3dcow 8 * :Usayd Callender");
+				sendMessage(bwriter,"USER username 8 * :firstname lastname");
 				pprint("*Sent user*");
 
 				String line = null;
@@ -99,8 +99,8 @@ public class MainActivity extends Activity
 					}
 				}
 				
-				sendMessage(bwriter,"JOIN #ModPEScripts");
-				pprint("joining #ModPEScripts..");
+				sendMessage(bwriter,"JOIN #Channel");
+				pprint("joining #Channel..");
 				
 				new Listen(breader,bwriter).start();
 				
@@ -156,7 +156,7 @@ public class MainActivity extends Activity
 			while( (line = in.readLine()) !=null){
 				if(line.toLowerCase().startsWith("PING")){
 					sendMessage(out,"PONG "+line.substring(5));
-					sendMessage(out,"PRIVMSG #ModPEScripts :I got pinged");
+					sendMessage(out,"PRIVMSG #Channel :I got pinged");
 				}
 				else{
 					pprint(line);
